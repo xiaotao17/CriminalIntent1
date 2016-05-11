@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
  * Created by YANGTAO on 2016/5/10.
  */
 public class CrimeListFragment extends ListFragment {
-   private static String TAG = "CrimeListFragment";
+//   private static String TAG = "CrimeListFragment";
     private ArrayList<Crime> mCrimes;
 
     @Override
@@ -36,7 +35,8 @@ public class CrimeListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Crime c =( (CrimeAdapter)getListAdapter()).getItem(position);
-        Intent i = new Intent(getActivity(),CrimeActivity.class);
+//        Intent i = new Intent(getActivity(),CrimeActivity.class);
+        Intent i = new Intent(getActivity(),CrimePagerActivity.class);
         i.putExtra(CrimeFragment.EXTRA_CRIME_ID,c.getId());
         startActivity(i);
     }
