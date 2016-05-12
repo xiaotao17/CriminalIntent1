@@ -1,5 +1,8 @@
 package com.yangtao.criminalintent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -7,6 +10,10 @@ import java.util.UUID;
  * Created by YANGTAO on 2016/5/9.
  */
 public class Crime {
+    private static final String JSON_ID = "id";
+    private static final String JSON_TITLE = "title";
+    private static final String JSON_SOLVED = "solved";
+    private static final String JSON_DATE = "date";
 
     private UUID mId;
     private String mTitle;
@@ -16,6 +23,24 @@ public class Crime {
     public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();
+    }
+
+    public Crime(JSONObject json) throws JSONException{
+        mId = UUID.fromString(json.getString(JSON_ID));
+        if (json.has(JSON_TITLE)){
+            mTitle = json.getString(JSON_TITLE);
+        }
+        mSolved = json.getBoolean(JSON_SOLVED);
+        mDate = new Date(json.getLong(JSON_DATE));
+    }
+
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_ID,mId.toString());
+        json.put(JSON_TITLE,mTitle);
+        json.put(JSON_SOLVED,mSolved);
+        json.put(JSON_DATE,mDate.getTime());
+        return json;
     }
 
     public UUID getId() {
